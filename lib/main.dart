@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           title: "Censor Mobile",
-
           theme: AppTheme.lightTheme,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,

@@ -20,7 +20,7 @@ class AppTheme {
         onSecondary: AppColors.onPrimary,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,
-        surfaceVariant: AppColors.surfaceVariant,
+        surfaceContainerHighest: AppColors.surfaceVariant,
         onSurfaceVariant: AppColors.onSurfaceVariant,
         background: AppColors.background,
         onBackground: AppColors.onBackground,

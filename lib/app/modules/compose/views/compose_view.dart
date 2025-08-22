@@ -59,7 +59,7 @@ class ComposeView extends GetView<ComposeController> {
                     ),
                   )
                 : IconButton(
-                    onPressed: controller.sendEmail,
+                    onPressed: controller.logout,
                     icon: const Icon(Icons.more_vert),
                     // style: IconButton.styleFrom(
                     //   backgroundColor: AppColors.primary,
@@ -140,7 +140,7 @@ class ComposeView extends GetView<ComposeController> {
 
   Widget _buildToField() {
     return Container(
-      height: 48.h,
+      height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
@@ -179,7 +179,7 @@ class ComposeView extends GetView<ComposeController> {
 
   Widget _buildSubjectField() {
     return Container(
-      height: 48.h,
+      height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [

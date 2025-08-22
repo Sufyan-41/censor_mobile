@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,8 +52,37 @@ class SplashController extends GetxController
     await animationController.forward();
 
     // Navigate to home after animation completes
-    await Future.delayed(const Duration(milliseconds: 500));
-    Get.offAllNamed('/login');
+    final user = FirebaseAuth.instance.currentUser;
+    if(user != null) {
+      debugPrint("Logged in user");
+      for (final userInfo in user.providerData) {
+        debugPrint("Provider ID: ${userInfo.providerId}");
+      }
+
+      // Example: check the first provider
+      final providerId = user.providerData.isNotEmpty ? user.providerData.first.providerId : null;
+
+      switch (providerId) {
+        case 'google.com':
+          debugPrint("User logged in with Google");
+          Get.offAllNamed('/compose');
+          break;
+        case 'microsoft.com':
+          Get.offAllNamed('/outlook-compose');
+          debugPrint("User logged in with Microsoft");
+          break;
+        case 'apple.com':
+          debugPrint("User logged in with Apple");
+          break;
+        case 'password':
+          debugPrint("User logged in with Email/Password");
+          break;
+        default:
+          debugPrint("Other login provider: $providerId");
+      }
+    } else {
+      Get.offAllNamed('/login');
+    }
   }
 
   @override

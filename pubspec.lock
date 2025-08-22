@@ -536,6 +536,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
+  open_mail_launcher:
+    dependency: "direct main"
+    description:
+      name: open_mail_launcher
+      sha256: "95c13d8012bfc66322e5c4e76007f5fedc0ff71633808e327d899f8b376bccb6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   package_config:
     dependency: transitive
     description:

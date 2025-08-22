@@ -1,11 +1,15 @@
+import 'package:censor_mobile/app/routes/app_pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:open_mail_launcher/open_mail_launcher.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 
 class OutlookComposeController extends GetxController {
   // Text editing controllers
+  final TextEditingController fromController = TextEditingController();
   final TextEditingController toController = TextEditingController();
   final TextEditingController subjectController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
@@ -23,6 +27,13 @@ class OutlookComposeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    final user = FirebaseAuth.instance.currentUser;
+    fromController.text = user?.email ?? '';
+    // FirebaseAuth.instance.signOut();
+    // toController.text = 'flutter@rapidev.tech';
+    // subjectController.text = "Test Subject";
+    // bodyController.text = "Test Body lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet odio auctor, porta tellus volutpat, lobortis est. Proin in nunc sollicitudin, varius urna eu, fermentum lectus. Aenean tellus nulla, scelerisque vel euismod sit amet, pretium sed mi. Duis sed imperdiet nisl. Donec quis sem auctor ex rhoncus finibus ac condimentum massa. Cras aliquet erat neque, in lobortis ligula elementum a. Aliquam tempus lectus nec placerat placerat. Mauris porttitor elementum euismod. Suspendisse semper sapien odio. Integer sollicitudin sagittis magna, id bibendum felis molestie id. Integer fermentum nec ligula vitae auctor. Phasellus posuere magna eu dolor iaculis, non finibus elit rhoncus. Sed malesuada, ante sit amet mattis tempus, mi mi malesuada metus, non dapibus ex arcu in lorem.";
 
     // Listen for changes to track unsaved content
     toController.addListener(_onContentChanged);
@@ -53,6 +64,61 @@ class OutlookComposeController extends GetxController {
     isBodyFocused.value = bodyFocusNode.hasFocus;
   }
 
+  Future<bool> launchOutlookApp() async {
+    final String to = toController.text.trim();
+    final String subject = subjectController.text.trim();
+    final String body = bodyController.text.trim();
+
+    final emailContent = EmailContent(
+      to: [to],
+      subject: subject,
+      body: body,
+      isHtml: false,
+    );
+
+    List<MailApp> apps = await OpenMailLauncher.getMailApps();
+
+    MailApp? outlook = apps.firstWhereOrNull((app) => app.name.toLowerCase().contains('outlook'));
+
+    if (outlook != null) {
+      bool success = await OpenMailLauncher.openSpecificMailApp(
+        mailApp: outlook,
+        emailContent: emailContent,
+      );
+      if(!success) {
+        Get.snackbar(
+          'Error',
+          'Could not launch Gmail app',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: AppColors.error.withValues(alpha: 0.1),
+          colorText: AppColors.error,
+          borderRadius: 8,
+          margin: const EdgeInsets.all(16),
+          icon: const Icon(Icons.error_outline, color: AppColors.error),
+          shouldIconPulse: false,
+          duration: const Duration(seconds: 3),
+        );
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      Get.snackbar(
+        'Error',
+        'Microsoft Outlook app not available on your device',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: AppColors.error.withValues(alpha: 0.1),
+        colorText: AppColors.error,
+        borderRadius: 8,
+        margin: const EdgeInsets.all(16),
+        icon: const Icon(Icons.error_outline, color: AppColors.error),
+        shouldIconPulse: false,
+        duration: const Duration(seconds: 3),
+      );
+      return false;
+    }
+  }
+
   // Send email function
   Future<void> sendEmail() async {
     // Check for recipient email
@@ -71,28 +137,29 @@ class OutlookComposeController extends GetxController {
       isSending.value = true;
       errorMessage.value = '';
 
-      // TODO: Implement actual Microsoft email sending logic
-      await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+      // TODO: Implement actual email sending logic
+      final result = await launchOutlookApp(); // Simulate API call
 
-      // Show success message
-      Get.snackbar(
-        'Success',
-        'Email sent successfully!',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: AppColors.success.withValues(alpha: 0.1),
-        colorText: AppColors.success,
-        borderRadius: 8,
-        margin: const EdgeInsets.all(16),
-        icon: const Icon(Icons.check_circle_outline, color: AppColors.success),
-        shouldIconPulse: false,
-        duration: const Duration(seconds: 3),
-      );
+      if(result) {
+        // Show success message
+        Get.snackbar(
+          'Success',
+          'Email sent successfully!',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: AppColors.success.withValues(alpha: 0.1),
+          colorText: AppColors.success,
+          borderRadius: 8,
+          margin: const EdgeInsets.all(16),
+          icon: const Icon(Icons.check_circle_outline, color: AppColors.success),
+          shouldIconPulse: false,
+          duration: const Duration(seconds: 3),
+        );
 
-      // Clear form after successful send
-      _clearForm();
+        // Clear form after successful send
+        _clearForm();
+      }
 
       // Navigate back or to inbox
-      Get.back();
     } catch (e) {
       errorMessage.value = 'Failed to send email. Please try again.';
       Get.snackbar(
@@ -270,5 +337,10 @@ class OutlookComposeController extends GetxController {
   // Clear error message
   void clearError() {
     errorMessage.value = '';
+  }
+
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAndToNamed(Routes.SPLASH);
   }
 }

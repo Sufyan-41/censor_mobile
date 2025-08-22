@@ -37,39 +37,21 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
         onPressed: controller.handleBackPress,
         icon: const Icon(Icons.close, color: Colors.white),
       ),
-      title: Row(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 32.w,
-            height: 32.w,
-            decoration: const BoxDecoration(
+          Text(
+            'New message',
+            style: AppTypography.titleMedium.copyWith(
               color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.person,
-              size: 20.sp,
-              color: const Color(0xFF0078D4),
+              fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(width: 12.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'New message',
-                style: AppTypography.titleMedium.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                'themssk@hotmail.com',
-                style: AppTypography.bodySmall.copyWith(
-                  color: Colors.white.withOpacity(0.9),
-                ),
-              ),
-            ],
+          Text(
+            controller.fromController.text,
+            style: AppTypography.bodySmall.copyWith(
+              color: Colors.white.withOpacity(0.9),
+            ),
           ),
         ],
       ),
@@ -88,7 +70,7 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
                   ),
                 )
               : IconButton(
-                  onPressed: controller.handleBackPress,
+                  onPressed: controller.logout,
                   icon: Icon(Icons.remove, color: Colors.white, size: 24.sp),
                 ),
         ),
@@ -124,7 +106,7 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
 
   Widget _buildToField() {
     return Container(
-      height: 48.h,
+      height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
@@ -163,7 +145,7 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
 
   Widget _buildSubjectField() {
     return Container(
-      height: 48.h,
+      height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
