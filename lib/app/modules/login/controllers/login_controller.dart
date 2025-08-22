@@ -48,6 +48,7 @@ class LoginController extends GetxController {
 
   // Email/Password login
   Future<void> loginWithEmail() async {
+    if(isLoading() || isMicrosoftLoading() || isGoogleLoading()) return;
     if (!formKey.currentState!.validate()) return;
 
     try {
@@ -57,7 +58,7 @@ class LoginController extends GetxController {
       await Future.delayed(const Duration(seconds: 2)); // Simulate API call
 
       // Navigate to home on success
-      Get.offAllNamed('/home');
+      // Get.offAllNamed('/home');
     } catch (e) {
       errorMessage.value = 'Login failed. Please try again.';
     } finally {
@@ -69,10 +70,13 @@ class LoginController extends GetxController {
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
   ];
+
+  final isGoogleLoading = false.obs;
   // Google login
   Future<void> loginWithGoogle() async {
+    if(isLoading() || isMicrosoftLoading() || isGoogleLoading()) return;
     try {
-      isLoading.value = true;
+      isGoogleLoading.value = true;
       errorMessage.value = '';
 
       final GoogleSignIn googleSignIn = GoogleSignIn.instance;
@@ -106,14 +110,17 @@ class LoginController extends GetxController {
     } catch (e) {
       errorMessage.value = 'Google login failed. Please try again.';
     } finally {
-      isLoading.value = false;
+      isGoogleLoading.value = false;
     }
   }
 
+  final isMicrosoftLoading = false.obs;
+
   // Microsoft login
   Future<void> loginWithMicrosoft() async {
+    if(isLoading() || isMicrosoftLoading() || isGoogleLoading()) return;
     try {
-      isLoading.value = true;
+      isMicrosoftLoading.value = true;
       errorMessage.value = '';
 
       await FirebaseAuth.instance.signOut();
@@ -142,7 +149,7 @@ class LoginController extends GetxController {
     } catch (e) {
       errorMessage.value = 'Microsoft login failed. Please try again.';
     } finally {
-      isLoading.value = false;
+      isMicrosoftLoading.value = false;
     }
   }
 

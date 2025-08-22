@@ -37,20 +37,40 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
         onPressed: controller.handleBackPress,
         icon: const Icon(Icons.close, color: Colors.white),
       ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      title: Row(
         children: [
-          Text(
-            'New message',
-            style: AppTypography.titleMedium.copyWith(
+          Container(
+            width: 32.w,
+            height: 32.w,
+            decoration: const BoxDecoration(
               color: Colors.white,
-              fontWeight: FontWeight.w600,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.person,
+              size: 20.sp,
+              color: const Color(0xFF0078D4),
             ),
           ),
-          Text(
-            controller.fromController.text,
-            style: AppTypography.bodySmall.copyWith(
-              color: Colors.white.withOpacity(0.9),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'New message',
+                  style: AppTypography.titleMedium.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Text(
+                  controller.fromController.text,
+                  style: AppTypography.bodySmall.copyWith(
+                    color: Colors.white.withOpacity(0.9),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

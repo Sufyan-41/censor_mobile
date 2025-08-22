@@ -255,12 +255,12 @@ class LoginView extends GetView<LoginController> {
         // Google Login Button
         _buildSocialButton(
           label: 'Continue with Google',
-          icon:
-              Icons.g_mobiledata, // You might want to use a custom Google icon
+          icon: Icons.g_mobiledata, // You might want to use a custom Google icon
           onPressed: controller.loginWithGoogle,
           backgroundColor: AppColors.surface,
           textColor: AppColors.onSurface,
           borderColor: AppColors.outline,
+          isLoading: controller.isGoogleLoading
         ),
 
         SizedBox(height: 16.h),
@@ -273,6 +273,7 @@ class LoginView extends GetView<LoginController> {
           backgroundColor: const Color(0xFF0078D4), // Microsoft blue
           textColor: Colors.white,
           borderColor: const Color(0xFF0078D4),
+          isLoading: controller.isMicrosoftLoading
         ),
       ],
     );
@@ -285,19 +286,20 @@ class LoginView extends GetView<LoginController> {
     required Color backgroundColor,
     required Color textColor,
     required Color borderColor,
+    required RxBool isLoading,
   }) {
     return Obx(
       () => SizedBox(
         width: double.infinity,
         height: 48.h,
         child: OutlinedButton(
-          onPressed: controller.isLoading.value ? null : onPressed,
+          onPressed: isLoading.value ? null : onPressed,
           style: OutlinedButton.styleFrom(
             backgroundColor: backgroundColor,
             foregroundColor: textColor,
             side: BorderSide(color: borderColor, width: 1),
           ),
-          child: controller.isLoading.value
+          child: isLoading.value
               ? SizedBox(
                   width: 20.w,
                   height: 20.w,
