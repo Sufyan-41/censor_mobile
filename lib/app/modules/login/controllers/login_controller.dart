@@ -63,20 +63,20 @@ class LoginController extends GetxController {
 
   // Google login
   Future<void> loginWithGoogle() async {
-    try {
-      isLoading.value = true;
-      errorMessage.value = '';
+    // try {
+    //   isLoading.value = true;
+    //   errorMessage.value = '';
 
-      // TODO: Implement Google Sign-In
-      await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+    //   // TODO: Implement Google Sign-In
+    //   await Future.delayed(const Duration(seconds: 2)); // Simulate API call
 
-      // Navigate to compose screen for Google login
-      Get.offAllNamed('/compose');
-    } catch (e) {
-      errorMessage.value = 'Google login failed. Please try again.';
-    } finally {
-      isLoading.value = false;
-    }
+    //   // Navigate to compose screen for Google login
+    //   Get.offAllNamed('/compose');
+    // } catch (e) {
+    //   errorMessage.value = 'Google login failed. Please try again.';
+    // } finally {
+    //   isLoading.value = false;
+    // }
   }
 
   // Microsoft login

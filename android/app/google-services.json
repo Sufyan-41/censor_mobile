@@ -12,7 +12,20 @@
           "package_name": "com.example.censor_mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "941144322331-p1i0hqpuvdns8v1kpeqephkn6752ge3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.censor_mobile",
+            "certificate_hash": "9a7482ce67529c269f8d2d97854b756e8bd398bc"
+          }
+        },
+        {
+          "client_id": "941144322331-uo8146o654v2k3fsigaocogbt3lt0kbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBOuSNqCk9zP7231NM_X7hAQDXGhOAtKyQ"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941144322331-uo8146o654v2k3fsigaocogbt3lt0kbr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "941144322331-5kvu38ie78rf4uogufhm84ropcdl44cl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.censorMobile"
+              }
+            }
+          ]
         }
       }
     }
