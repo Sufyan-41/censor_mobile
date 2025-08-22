@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "941144322331",
+    "project_id": "censor-51ee9",
+    "storage_bucket": "censor-51ee9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941144322331:android:97f5de697ecfb910d8a3be",
+        "android_client_info": {
+          "package_name": "com.example.censor_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOuSNqCk9zP7231NM_X7hAQDXGhOAtKyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
