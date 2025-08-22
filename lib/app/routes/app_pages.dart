@@ -16,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.OUTLOOK_COMPOSE;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
