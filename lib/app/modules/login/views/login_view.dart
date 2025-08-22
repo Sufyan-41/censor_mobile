@@ -137,9 +137,7 @@ class LoginView extends GetView<LoginController> {
         secure: !controller.isPasswordVisible.value,
         prefixIconData: Icons.lock_outline,
         prefixColor: AppColors.onSurfaceVariant,
-        suffixIconData: controller.isPasswordVisible.value
-            ? Icons.visibility_outlined
-            : Icons.visibility_off_outlined,
+        suffixIconData: controller.isPasswordVisible.value ? Icons.visibility_outlined : Icons.visibility_off_outlined,
         suffixColor: AppColors.onSurfaceVariant,
         suffixPress: controller.togglePasswordVisibility,
       ),

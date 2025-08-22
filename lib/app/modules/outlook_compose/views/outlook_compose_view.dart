@@ -106,7 +106,7 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
 
   Widget _buildToField() {
     return Container(
-      height: 54.h,
+      // height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
@@ -145,7 +145,7 @@ class OutlookComposeView extends GetView<OutlookComposeController> {
 
   Widget _buildSubjectField() {
     return Container(
-      height: 54.h,
+      // height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [

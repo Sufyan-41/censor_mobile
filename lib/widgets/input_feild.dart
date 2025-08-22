@@ -160,36 +160,31 @@ class InputField extends StatelessWidget {
             color: textColor ?? AppColors.onSurface,
             fontWeight: FontWeight.w400,
           ),
-          textAlignVertical: TextAlignVertical.top,
+          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             counterText: '',
-            contentPadding:
-                contentPadding ??
-                EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-            suffixIcon:
-                suffixIcon ??
-                (suffixIconData != null
-                    ? GestureDetector(
-                        onTap: suffixPress as Function()?,
-                        child: Icon(
-                          suffixIconData,
-                          color: suffixColor,
-                          size: 16.h,
-                        ),
-                      )
-                    : null),
-            prefixIcon:
-                prefixIcon ??
-                (prefixIconData != null
-                    ? Icon(prefixIconData, color: prefixColor, size: 24.h)
-                    : null),
-            prefix: prefix,
-            suffix: suffix,
+            contentPadding: contentPadding ?? EdgeInsets.symmetric(horizontal: 14.w),
+            suffixIcon: suffixIcon ?? (suffixIconData != null ? GestureDetector(
+              onTap: suffixPress as Function()?,
+              child: Icon(
+                suffixIconData,
+                color: suffixColor,
+                size: 16.h,
+              ),
+            ) : null),
+            prefixIcon: prefixIcon ?? (prefixIconData != null ? Icon(
+              prefixIconData,
+              color: prefixColor,
+              size: 24.h,
+            ) : null),
+            // prefix: prefix,
+            // suffix: suffix,
             fillColor: bgColor ?? AppColors.surfaceVariant,
             filled: true,
             hintStyle: AppTypography.bodyMedium.copyWith(
               color: hintColor ?? AppColors.onSurfaceVariant,
             ),
+            visualDensity: VisualDensity.compact,
             hintText: hintText.tr,
             border: InputBorder.none,
             enabledBorder: OutlineInputBorder(

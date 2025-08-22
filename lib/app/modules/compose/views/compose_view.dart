@@ -108,7 +108,7 @@ class ComposeView extends GetView<ComposeController> {
 
   Widget _buildFromField() {
     return Container(
-      height: 48.h,
+      // height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
@@ -140,7 +140,7 @@ class ComposeView extends GetView<ComposeController> {
 
   Widget _buildToField() {
     return Container(
-      height: 54.h,
+      // height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
@@ -179,7 +179,7 @@ class ComposeView extends GetView<ComposeController> {
 
   Widget _buildSubjectField() {
     return Container(
-      height: 54.h,
+      // height: 54.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
